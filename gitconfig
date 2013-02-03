@@ -1,0 +1,35 @@
+[push]
+  default = current
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[format]
+  pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
+[alias]
+  a = !git add -u && git add . && git status -s
+  adi = !git add -u && git add . && git diff --cached
+  ap = commit --amend -C HEAD
+  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
+  c = commit -v
+  ca = commit --amend
+  co = checkout
+  cp = cherry-pick
+  di = diff
+  dic = diff --cached
+  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
+  plre = pull --rebase
+  pr = remote prune origin
+  ps = push
+  rbc = rebase --continue
+  rbi = rebase -i
+  st = status -s
+  unwip = !test "`git log -n1 --pretty=format:%s`" = "wip" && git reset HEAD~1
+  up = !git fetch origin && git rebase origin/master
+  wip = !git add -A && git commit -m "wip"
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf = input
+[user]
+  name = Piotr Gębala
+  email = piotrek.gebala@gmail.com

@@ -1,0 +1,18 @@
+--ignore-dir=log
+--type-set=cucumber=.feature
+--type-add=ruby=.haml,.rake,.rsel
+--type-add=html=.html
+--type-add=css=.css
+
+# Search
+--type-set=coffee=.coffee
+--type-set=cucumber=.feature
+--type-set=haml=.haml
+--type-set=slim=.slim
+--type-set=sass=.sass,.scss
+
+# Don't search
+--ignore-dir=log
+--ignore-dir=tags
+--ignore-dir=tmp
+--ignore-dir=coverage
