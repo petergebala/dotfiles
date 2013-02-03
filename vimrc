@@ -3,7 +3,7 @@ set nocompatible    " Use Vim settings, rather then Vi settings
 set nobackup
 set nowritebackup
 set noswapfile
-set history=100
+set history=50
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
 set incsearch       " do incremental searching
@@ -19,13 +19,13 @@ set cursorline
 set wildignorecase
 set hidden
 set ignorecase
-set smartcase
+set ttyfast
+set lazyredraw
 
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-  syntax enable
-endif
+" Help keep lines within 80 columns
+set colorcolumn=80
 
+syntax on
 filetype off                   " required!
 
 " Display extra whitespace
@@ -41,15 +41,9 @@ if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" Numbers
-if v:version > 702
-  " set relativenumber
-  set number
-  set numberwidth=4
-else
-  set number
-  set numberwidth=5
-endif
+" set relativenumber
+set number
+set numberwidth=4
 
 " Cucumber navigation commands
 autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
@@ -57,9 +51,6 @@ autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=rou
 
 " :Cuc my text (no quotes) -> runs cucumber scenarios containing "my text"
 command! -nargs=+ Cuc :!ack --no-heading --no-break <q-args> | cut -d':' -f1,2 | xargs bundle exec cucumber --no-color
-
-" Help keep lines within 80 columns
-set colorcolumn=80
 
 " Replace double quotes with single quotes
 nmap <Leader>' :s/"/'/g<CR>
@@ -96,23 +87,14 @@ Bundle 'tpope/vim-endwise'
 Bundle 'slim-template/vim-slim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
-Bundle 'wincent/Command-T'
 
 filetype plugin indent on     " required!
 
 " Solarized
 set background=dark
 let g:solarized_termtrans = 1
+let g:solarized_termcolors = 256
 colorscheme solarized
-
-" CommandT
-set ttimeoutlen=50
-
-if &term =~ "xterm" || &term =~ "screen"
-  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-endif
 
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
