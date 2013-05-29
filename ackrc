@@ -10,6 +10,7 @@
 --type-set=haml=.haml
 --type-set=slim=.slim
 --type-set=sass=.sass,.scss
+--type-set=yaml=.yml
 
 # Don't search
 --ignore-dir=log
