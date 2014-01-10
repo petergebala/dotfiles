@@ -21,6 +21,7 @@ set hidden
 set ignorecase
 set ttyfast
 set lazyredraw
+set tags=./tags;
 
 " Help keep lines within 80 columns
 set colorcolumn=80
@@ -87,6 +88,8 @@ Bundle 'tpope/vim-endwise'
 Bundle 'slim-template/vim-slim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
+Bundle 'mileszs/ack.vim'
+Bundle 'msanders/snipmate.vim'
 
 filetype plugin indent on     " required!
 

@@ -40,3 +40,10 @@ export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 source $ZSH/oh-my-zsh.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+### Custom commands
+alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"
+alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
