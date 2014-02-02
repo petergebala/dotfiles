@@ -1,16 +1,50 @@
-*.DS_Store
+# Ingore vim files
 *.scratch.*
 *.sw[nop]
-.bundle
-.sass-cache/
-.vimrc
+
+# Ingorne bin/stubs
 bin/stubs
+
+# Ingore databases
 db/*.sqlite3
-log/*.log
-rerun.txt
-tags
+dump.rdb
+*.DS_Store
+
+# Ignore configuration files
+/config/database.yml
+/config/config.yml
+/config/initializers/wkhtmltopdf.rb
+.vimrc
+.bundle
+zeus.json
+.ruby-version
+
+# Ignore uplaoded files
+/public/system/*
+/public/uploads/*
+/public/assets/*
+
+# Ignore cache, log, tmpfiles
+.sass-cache/
 tmp/**/*
 !tmp/cache/.keep
-vendor/bundler_gems
-vim/.netrwhist
-zeus.json
+log/*.log
+
+# Ignore simple_cov output
+/coverage/*
+/vendor/*
+
+# VCR cassets
+/spec/cassettes/*
+/features/cassetes/*
+
+# Ignore gedit temp files
+*~
+.env*
+
+# Ignore eclipse project file
+.project
+
+# Ingore Ctags
+TAGS
+tags
