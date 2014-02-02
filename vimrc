@@ -22,6 +22,16 @@ set ignorecase
 set ttyfast
 set lazyredraw
 set tags=./tags;
+set completeopt=longest,menuone
+
+" Autocomplete - hit enter to pick element
+" inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<C-g>u\<CR>"
+" open omni completion menu closing previous if open and opening new menu without changing the text
+" inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+"             \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" " open user completion menu closing previous if open and opening new menu without changing the text
+" inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+"             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 " Help keep lines within 80 columns
 set colorcolumn=80
