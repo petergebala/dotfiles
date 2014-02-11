@@ -101,6 +101,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'godlygeek/tabular'
 
 filetype plugin indent on     " required!
 
