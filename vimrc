@@ -100,6 +100,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on     " required!
 
@@ -107,6 +108,10 @@ filetype plugin indent on     " required!
 set background=dark
 let g:solarized_termtrans = 1
 let g:solarized_termcolors = 256
+
+" Map CtrlP
+let g:ctrlp_map = '<c-P>'
+
 colorscheme solarized
 
 " Nerdtree
