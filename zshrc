@@ -47,3 +47,4 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### Custom commands
 alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"
 alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
+alias restart_mouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
