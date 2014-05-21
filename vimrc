@@ -70,6 +70,9 @@ nmap <Leader>' :s/"/'/g<CR>
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.md set spell
 
+" Remove whitespaces
+autocmd BufWritePre *.rb :%s/\s\+$//e
+
 " Ctrl+Q now is working
 silent !stty -ixon > /dev/null 2>/dev/null
 
