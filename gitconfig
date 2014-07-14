@@ -4,6 +4,7 @@
   branch = auto
   diff = auto
   status = auto
+  ui = auto
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
 [alias]
