@@ -105,6 +105,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'ekalinin/Dockerfile.vim'
 
 filetype plugin indent on     " required!
 
