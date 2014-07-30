@@ -77,6 +77,7 @@ autocmd BufWritePre *.rb :%s/\s\+$//e
 silent !stty -ixon > /dev/null 2>/dev/null
 
 " Yank to clipboard
+set clipboard=unnamedplus
 noremap <leader>y "+y
 noremap <leader>yy "+Y
 
