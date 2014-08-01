@@ -30,7 +30,7 @@ ZSH_THEME="bira"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler gem rails3)
+plugins=(git bundler gem rails docker vagrant)
 
 
 # Customize to your needs...
@@ -48,3 +48,4 @@ export PATH="/usr/local/heroku/bin:$PATH"
 alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"
 alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
 alias restart_mouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
+eval `dircolors ~/.dircolors`

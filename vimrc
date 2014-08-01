@@ -77,6 +77,7 @@ autocmd BufWritePre *.rb :%s/\s\+$//e
 silent !stty -ixon > /dev/null 2>/dev/null
 
 " Yank to clipboard
+set clipboard=unnamedplus
 noremap <leader>y "+y
 noremap <leader>yy "+Y
 
@@ -105,6 +106,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'ekalinin/Dockerfile.vim'
 
 filetype plugin indent on     " required!
 
