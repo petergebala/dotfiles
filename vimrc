@@ -23,6 +23,7 @@ set ttyfast
 set lazyredraw
 set tags=./tags;
 set completeopt=longest,menuone
+set encoding=utf-8
 
 " Autocomplete - hit enter to pick element
 " inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<C-g>u\<CR>"
