@@ -108,6 +108,7 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'ekalinin/Dockerfile.vim'
+Bundle 'heartsentwined/vim-emblem'
 
 filetype plugin indent on     " required!
 
@@ -123,3 +124,15 @@ colorscheme solarized
 
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
+
+" Autocomplete under ctrl+space
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+      \ "\<lt>C-n>" :
+      \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+      \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+      \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" Autocomplete movement - jk
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
