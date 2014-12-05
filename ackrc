@@ -11,7 +11,7 @@
 --type-set=slim=.slim
 --type-set=sass=.sass,.scss
 --type-set=yaml=.yml
---type-set=javascript=.js
+--type-set=javascript=.js,.coffee,.js.coffee
 
 # Don't search
 --ignore-dir=log
