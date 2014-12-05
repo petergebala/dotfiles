@@ -132,6 +132,7 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
       \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
       \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
+inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
 
 " Autocomplete movement - jk
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
