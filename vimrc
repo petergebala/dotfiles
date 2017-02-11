@@ -109,6 +109,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'heartsentwined/vim-emblem'
+Bundle 'leafgarland/typescript-vim'
 
 filetype plugin indent on     " required!
 
@@ -137,3 +138,17 @@ inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
 " Autocomplete movement - jk
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+" automaticly align
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
