@@ -50,3 +50,6 @@ alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without dev
 alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
 alias restart_mouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
 eval `dircolors ~/.dircolors`
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

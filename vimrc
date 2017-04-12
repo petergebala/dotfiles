@@ -102,16 +102,14 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'slim-template/vim-slim'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'ekalinin/Dockerfile.vim'
-Bundle 'heartsentwined/vim-emblem'
-Bundle 'leafgarland/typescript-vim'
 Bundle 'sheerun/vim-polyglot'
+Bundle 'vim-syntastic/syntastic'
 
 filetype plugin indent on     " required!
 
@@ -154,3 +152,19 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['jsxhint', 'eslint']
+" let g:syntastic_debug = 3
+
+if $PATH !~ "\.nvm"
+  let $PATH="/home/piotrek/.nvm/versions/node/v7.9.0/bin:" . $PATH
+endif
