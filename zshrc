@@ -43,6 +43,7 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=$PATH:~/connectiq/bin
 
 ### Custom commands
 alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"

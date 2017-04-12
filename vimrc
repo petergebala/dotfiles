@@ -24,6 +24,7 @@ set lazyredraw
 set tags=./tags;
 set completeopt=longest,menuone
 set encoding=utf-8
+set fileformat=unix
 
 " Autocomplete - hit enter to pick element
 " inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<C-g>u\<CR>"
@@ -110,6 +111,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'heartsentwined/vim-emblem'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'sheerun/vim-polyglot'
 
 filetype plugin indent on     " required!
 
