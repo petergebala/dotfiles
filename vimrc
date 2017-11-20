@@ -73,13 +73,13 @@ au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.md set spell
 
 " Remove whitespaces
-autocmd BufWritePre *.rb :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Ctrl+Q now is working
 silent !stty -ixon > /dev/null 2>/dev/null
 
 " Yank to clipboard
-set clipboard=unnamedplus
+set clipboard=unnamedplus,unnamed
 noremap <leader>y "+y
 noremap <leader>yy "+Y
 
@@ -167,4 +167,11 @@ let g:syntastic_javascript_checkers = ['jsxhint', 'eslint']
 
 if $PATH !~ "\.nvm"
   let $PATH="/home/piotrek/.nvm/versions/node/v7.9.0/bin:" . $PATH
+endif
+
+if has("unix")
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Linux"
+    set t_BE=
+  endif
 endif
