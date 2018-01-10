@@ -59,8 +59,8 @@ set number
 set numberwidth=4
 
 " Cucumber navigation commands
-autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+" autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
+" autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
 " :Cuc my text (no quotes) -> runs cucumber scenarios containing "my text"
 command! -nargs=+ Cuc :!ack --no-heading --no-break <q-args> | cut -d':' -f1,2 | xargs bundle exec cucumber --no-color
@@ -73,7 +73,8 @@ au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.md set spell
 
 " Remove whitespaces
-autocmd BufWritePre * :%s/\s\+$//e
+
+autocmd BufWritePre * if !(&filetype == 'markdown') | :%s/\s\+$//e | endif
 
 " Ctrl+Q now is working
 silent !stty -ixon > /dev/null 2>/dev/null
@@ -110,6 +111,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'vim-syntastic/syntastic'
+Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on     " required!
 
