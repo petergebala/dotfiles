@@ -1,3 +1,34 @@
+" Vundle configrauton
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Bundled plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mileszs/ack.vim'
+Plugin 'msanders/snipmate.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+call vundle#end()            " required
+filetype plugin indent on    " required!
+
 " General settings
 set nocompatible    " Use Vim settings, rather then Vi settings
 set nobackup
@@ -36,10 +67,10 @@ set fileformat=unix
 "             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 " Help keep lines within 80 columns
-set colorcolumn=80
+set colorcolumn=110
 
 syntax on
-filetype off                   " required!
+filetype on                   " required!
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
@@ -73,7 +104,6 @@ au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.md set spell
 
 " Remove whitespaces
-
 autocmd BufWritePre * if !(&filetype == 'markdown') | :%s/\s\+$//e | endif
 
 " Ctrl+Q now is working
@@ -87,48 +117,21 @@ noremap <leader>yy "+Y
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" Vundle configrauton
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Bundled plugins
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-endwise'
-Bundle 'slim-template/vim-slim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'ekalinin/Dockerfile.vim'
-Bundle 'sheerun/vim-polyglot'
-Bundle 'vim-syntastic/syntastic'
-Bundle 'derekwyatt/vim-scala'
-
-filetype plugin indent on     " required!
-
 " Solarized
 set background=dark
 let g:solarized_termtrans = 1
 let g:solarized_termcolors = 256
+colorscheme solarized
 
 " Map CtrlP
 let g:ctrlp_map = '<c-P>'
-
-colorscheme solarized
 
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
 
 " Autocomplete under ctrl+space
+set omnifunc=syntaxcomplete#Complete
+set completeopt=longest,menuone
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
       \ "\<lt>C-n>" :
       \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
@@ -163,17 +166,19 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jsxhint', 'eslint']
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+
 " let g:syntastic_debug = 3
-
-if $PATH !~ "\.nvm"
-  let $PATH="/home/piotrek/.nvm/versions/node/v7.9.0/bin:" . $PATH
-endif
-
 if has("unix")
   let s:uname = system("echo -n \"$(uname)\"")
   if !v:shell_error && s:uname == "Linux"
     set t_BE=
   endif
 endif
+
+" ctags
+map <Leader>rt :!ctags --extra=+f --exclude=.git --exclude=log -R * vendor/bundle/*<CR><CR>
+
+nnoremap <Leader>vr :source $MYVIMRC<CR>

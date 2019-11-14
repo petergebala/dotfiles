@@ -18,3 +18,4 @@
 --ignore-dir=tags
 --ignore-dir=tmp
 --ignore-dir=coverage
+--ignore-dir=vendor
