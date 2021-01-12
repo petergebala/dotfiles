@@ -1,32 +1,38 @@
-" Vundle configrauton
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Autoload Vim-Plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" Bundled plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mileszs/ack.vim'
-Plugin 'msanders/snipmate.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugins
+Plug 'VundleVim/Vundle.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomtom/tcomment_vim'
+Plug 'Lokaltog/vim-powerline'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'scrooloose/nerdtree'
+Plug 'mileszs/ack.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required!
 
 " General settings
@@ -81,20 +87,13 @@ if executable("ack")
 endif
 
 " Use The Silver Searcher instead of Grep when available
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor
+if executable('ag')
+  let g:ackprg='ag --vimgrep'
 endif
 
 " set relativenumber
 set number
 set numberwidth=4
-
-" Cucumber navigation commands
-" autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-" autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
-
-" :Cuc my text (no quotes) -> runs cucumber scenarios containing "my text"
-command! -nargs=+ Cuc :!ack --no-heading --no-break <q-args> | cut -d':' -f1,2 | xargs bundle exec cucumber --no-color
 
 " Replace double quotes with single quotes
 nmap <Leader>' :s/"/'/g<CR>
@@ -109,13 +108,14 @@ autocmd BufWritePre * if !(&filetype == 'markdown') | :%s/\s\+$//e | endif
 " Ctrl+Q now is working
 silent !stty -ixon > /dev/null 2>/dev/null
 
-" Yank to clipboard
-set clipboard=unnamedplus,unnamed
-noremap <leader>y "+y
-noremap <leader>yy "+Y
-
-" Preserve indentation while pasting text from the OS X clipboard
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+set clipboard+=unnamedplus
+" " Yank to clipboard
+" set clipboard=unnamedplus,unnamed
+" noremap <leader>y "+y
+" noremap <leader>yy "+Y
+"
+" " Preserve indentation while pasting text from the OS X clipboard
+" noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Solarized
 set background=dark
@@ -123,8 +123,9 @@ let g:solarized_termtrans = 1
 let g:solarized_termcolors = 256
 colorscheme solarized
 
-" Map CtrlP
-let g:ctrlp_map = '<c-P>'
+" FZF config
+let g:fzf_preview_window = 'right:60%'
+let g:fzf_tags_command = 'ctags -R'
 
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
@@ -159,9 +160,11 @@ function! s:align()
 endfunction
 
 " Syntastic
+set statusline=%f%h%w%m%r
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%=L%l:C%c:P%p " Line no, column no, percentage of the file
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1

@@ -16,9 +16,12 @@ in insert mode:
     ctrl+p                                  # previous selection
     ctrl+}                                  # moves to method definition
 
-##### CtrlP in command mode:
+##### FZF
 
-    ctrl+p                                  # find file
+    :Files                                  # find file
+    :GFiles                                 # git ls-files
+    :BLines                                 # lines in buffer (opened file)
+    :Ag                                     # find inside file
 
 ##### Change inside:
 
