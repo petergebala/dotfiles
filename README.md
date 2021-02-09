@@ -11,10 +11,11 @@ Run: `install.sh`
 
 in insert mode:
 
-    ctrl+p                                  # Shows autocomplete menu
-    ctrl+n                                  # Next selection
-    ctrl+p                                  # previous selection
-    ctrl+}                                  # moves to method definition
+    ctrl+space
+    gd                                      # moves to method definition
+    gf                                      # moves to file
+    F2                                      # rename
+    K                                       # documentation
 
 ##### FZF
 

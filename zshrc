@@ -32,23 +32,11 @@ ZSH_THEME="bira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git bundler gem rails docker vagrant)
 
-
-# Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/piotrek/.rvm/bin
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM 
-
 source $ZSH/oh-my-zsh.sh
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH=$PATH:~/connectiq/bin
 
 ### Custom commands
 alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"
 alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
-alias restart_mouse="sudo modprobe -r psmouse && sudo modprobe psmouse"
 eval `dircolors ~/.dircolors`
 
 export NVM_DIR="$HOME/.nvm"
