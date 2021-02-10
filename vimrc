@@ -120,8 +120,8 @@ let g:airline_solarized_bg='dark'
 
 " Ale linting
 set omnifunc=ale#completion#OmniFunc
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 let g:ale_completion_enabled = 0
