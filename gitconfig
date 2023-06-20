@@ -28,10 +28,17 @@
   unwip = !test "`git log -n1 --pretty=format:%s`" = "wip" && git reset HEAD~1
   up = !git fetch origin && git rebase origin/master
   wip = !git add -A && git commit -m "wip"
+  local = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  ongoing = local --no-merge=master
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
-  editor = vim
+  editor = nvim
 [user]
   name = Piotr Gębala
   email = piotrek.gebala@gmail.com
+[pull]
+  # default = rebase
+  rebase = true
+[rebase]
+  autoStash = true

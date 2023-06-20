@@ -4,6 +4,43 @@ Dotfiles by Peter Gębala
 #### Installation
 Run: `install.sh`
 #### Vim smart usage:
+##### General:
+    \                                       # leader key
+    *                                       # highlight current word
+    %s/old/new/gc                           # Rename variable in file with confirmation
+    f                                       # Find after cursor
+    F                                       # Find before cursor
+    zc                                      # Close current fold
+    zo                                      # Open current fold
+    za                                      # Toggle current fold
+    zC                                      # Close all folds in file
+    zO                                      # Opens all folds in file
+    zA                                      # Toggles all folds in file
+    zR                                      # Opens all folds to 0
+    zd                                      # Deletes fold at cursor
+    z#                                      # Deletes all folds
+    z=                                      # Spell suggestions
+    zg                                      # Marks a word under the cursor as a good one
+    zw                                      # Marks a word under the cursor as a wrong one
+
+##### Treesitter
+    TSInstallInfo                           # List of installed language parsers
+    TSInstall language                      # Install language parser
+
+##### HOP
+    HopChar1
+    HopPattern
+    HopWord
+
+##### Trouble
+    <leader>tt                              # Toggle trouble
+
+#### AutoPairs
+    <alt>e                                  # Asks where to put ending
+
+#### MatchUp
+    %                                       # Switch between matched word
+
 ##### Autocomplete:
 
     bundle install --path vendor            # Adds gems to vendor
@@ -13,11 +50,12 @@ in insert mode:
 
     ctrl+space
     gd                                      # moves to method definition
+    gD                                      # moves to method declaration
     gf                                      # moves to file
-    F2                                      # rename
+    gr                                      # check references
     K                                       # documentation
 
-##### FZF
+##### FZF:
 
     :Files                                  # find file
     :GFiles                                 # git ls-files
@@ -40,6 +78,10 @@ in insert mode:
     cs'"                                    # change ' -> "
     ds"                                     # delete "
     cst                                     # chage surrounding tag
+
+#### Gitsigns:
+
+    :Gitsigns diffthis
 
 ##### Tabular:
 
@@ -68,13 +110,13 @@ Example:
     :ls                                           # list elements in buffer
     :b file                                       # back to file
     g^]                                           # list of matching definitions ctags
-    ^x^f                                          # complete for filenames
+    ^x^f                                          # complete for file names
     "ya                                           # copy to register a
     "pa                                           # paste from register a
     :reg                                          # list registers
     Ctrl"                                         # enter register mode
     args `command which return files`
-    argdo %s/a/b/g | w                            # Each file in buffer substitude a to b and write file
+    argdo %s/a/b/g | w                            # Each file in buffer substitute a to b and write file
 
 #### Tmux cheatsheet
 ##### General:

@@ -3,6 +3,7 @@
 --type-add=ruby=.haml,.rake,.rsel
 --type-add=html=.html
 --type-add=css=.css
+--type-add=csv=.csv
 
 # Search
 --type-set=coffee=.coffee
@@ -12,6 +13,7 @@
 --type-set=sass=.sass,.scss
 --type-set=yaml=.yml
 --type-set=javascript=.js,.coffee,.js.coffee
+--type-set=.csv
 
 # Don't search
 --ignore-dir=log
@@ -19,3 +21,4 @@
 --ignore-dir=tmp
 --ignore-dir=coverage
 --ignore-dir=vendor
+--ignore-dir=node_modules

@@ -1,0 +1,8 @@
+print(" - Loading Piotr config")
+require("work.remap")
+print("   - remap")
+require("work.packer")
+print("   - packer")
+require("work.set")
+print("   - sets")
+print(" - Loaded Piotr config")

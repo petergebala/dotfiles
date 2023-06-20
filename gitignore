@@ -44,6 +44,7 @@ log/*.log
 
 # Ignore eclipse project file
 .project
+.irb_history
 
 # Ingore Ctags
 TAGS
