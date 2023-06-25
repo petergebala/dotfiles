@@ -7,8 +7,9 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="bira"
-DISPLAY=:0
+DISPLAY=:1
 HISTTIMEFORMAT="%Y-%m-%d %T "
+
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -42,5 +43,4 @@ alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without dev
 alias ctags_install="ctags -R --exclude=.git --exclude=log --exclude=doc --exclude=tmp --exclude=vendor *"
 eval `dircolors ~/.dircolors`
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export XDG_CONFIG_HOME="$HOME/.config"
