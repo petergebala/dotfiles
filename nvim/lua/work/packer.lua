@@ -12,12 +12,12 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', tag = '0.1.1', -- or , branch = '0.1.x',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      { 'nvim-telescope/telescope-live-grep-args.nvim' },
     }
   }
 
   -- Color scheme
-  use { "ellisonleao/gruvbox.nvim" }
+  use { 'ellisonleao/gruvbox.nvim' }
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
@@ -56,18 +56,18 @@ return require('packer').startup(function(use)
 
   -- Nvim Surround
   use({
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    'kylechui/nvim-surround',
+    tag = '*', -- Use for stability; omit to use `main` branch for the latest features
   })
 
   -- Trouble
-  use({ "folke/trouble.nvim" })
+  use({ 'folke/trouble.nvim' })
 
   -- Fugitive
-  use("tpope/vim-fugitive")
+  use('tpope/vim-fugitive')
 
   -- Vim Rails
-  use("tpope/vim-rails")
+  use('tpope/vim-rails')
 
   -- Lua Line
   use {
@@ -79,9 +79,11 @@ return require('packer').startup(function(use)
   use { 'numToStr/Comment.nvim' }
 
   -- Bufferline
-  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+  use { 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons' }
 
   -- Indent lines
-  use { "lukas-reineke/indent-blankline.nvim" }
+  use { 'lukas-reineke/indent-blankline.nvim' }
 
+  -- AutoPairs
+  use { 'windwp/nvim-autopairs' }
 end)

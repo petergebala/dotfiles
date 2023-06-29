@@ -6,6 +6,7 @@ vim.opt.number = true
 vim.opt.numberwidth = 4
 vim.opt.ruler = true
 vim.opt.cursorline = true
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.wildignorecase = true
 vim.opt.ignorecase = true
@@ -18,6 +19,7 @@ vim.opt.fileformat = "unix"
 vim.opt.smartindent = true
 vim.opt.laststatus = 2
 vim.opt.termguicolors = true
+vim.o.termguicolors = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
