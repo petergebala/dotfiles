@@ -5,7 +5,7 @@ Dotfiles by Peter Gębala
 Run: `install.sh`
 #### Vim smart usage:
 ##### General:
-    \                                       # leader key
+    ' '                                     # leader key
     *                                       # highlight current word
     %s/old/new/gc                           # Rename variable in file with confirmation
     f                                       # Find after cursor
@@ -26,20 +26,13 @@ Run: `install.sh`
 ##### Treesitter
     TSInstallInfo                           # List of installed language parsers
     TSInstall language                      # Install language parser
-
-##### HOP
-    HopChar1
-    HopPattern
-    HopWord
+    TSUpdate                                # Update TreeSitter
 
 ##### Trouble
     <leader>tt                              # Toggle trouble
 
 #### AutoPairs
     <alt>e                                  # Asks where to put ending
-
-#### MatchUp
-    %                                       # Switch between matched word
 
 ##### Autocomplete:
 
@@ -82,21 +75,6 @@ in insert mode:
 #### Gitsigns:
 
     :Gitsigns diffthis
-
-##### Tabular:
-
-    :Tabularize /regex/options
-
-Options are:
-
-    l - left aligning
-    r - right aligning
-    c - right aligning
-    number following the letter is the number of spaces padding to insert before the start of the next field
-
-Example:
-
-    :Tabularize /,/r1c1l0
 
 ##### Markers
 
