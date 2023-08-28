@@ -3,6 +3,8 @@ Dotfiles by Peter Gębala
 
 #### Installation
 Run: `install.sh`
+
+#### Gnome terminal profiles: https://github.com/Gogh-Co/Gogh
 #### Vim smart usage:
 ##### General:
     ' '                                     # leader key
