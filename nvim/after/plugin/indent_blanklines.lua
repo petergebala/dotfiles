@@ -1,4 +1,4 @@
-vim.cmd([[highlight IndentBlanklineChar guifg='#CCCCCCC' gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineChar guifg='#444444' gui=nocombine]])
 
 require("indent_blankline").setup {
   -- for example, context is off by default, use this to turn it on
