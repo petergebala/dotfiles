@@ -138,3 +138,33 @@ in insert mode:
     o                                             # swap panes
     q                                             # show pane numbers
     x                                             # kill pane
+
+#### Setup remotepair
+User Public IP if possible. Otherwise try: pinggy.io with TCP tunnel on port 22
+
+Add user and setup permissions
+```
+sudo adduser remotepair
+sudo usermod -a -G remotepair MAIN_USER
+```
+
+Add Public ssh keys to /home/remotepair/.ssh/authorized_keys
+
+Change in /etc/sshd_config
+```
+Match User remotepair
+  PasswordAuthentication no
+  X11Forwarding no
+  ForceCommand tmux -S /tmp/pair attach
+```
+
+Restart ssh
+```
+sudo service ssh restart
+```
+
+Enable/Disable ssh connection
+```
+chmod 777 /tmp/pair
+chmod 771 /tmp/pair
+```
