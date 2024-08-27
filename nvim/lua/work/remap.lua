@@ -5,7 +5,7 @@ vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<C-f>", ":NvimTreeFindFile<CR>")
 
 -- Trouble
-vim.keymap.set("n", "<leader>tt", ":TroubleToggle document_diagnostics<CR>")
+vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
 
 -- maps copying into system registry
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
