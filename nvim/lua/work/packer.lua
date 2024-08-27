@@ -9,10 +9,18 @@ return require('packer').startup(function(use)
 
   -- Telescope
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1', -- or , branch = '0.1.x',
+    'nvim-telescope/telescope.nvim', tag = '0.1.x', -- or , branch = '0.1.x',
     requires = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    }
+  }
+
+  -- Spectre
+  use {
+    'nvim-pack/nvim-spectre',
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
     }
   }
 
@@ -20,7 +28,13 @@ return require('packer').startup(function(use)
   use { 'ellisonleao/gruvbox.nvim' }
 
   -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
+  use { 
+    'nvim-treesitter/nvim-treesitter', 
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+  }
 
   -- LSP zero
   use {
