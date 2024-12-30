@@ -49,6 +49,7 @@ local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
   sources = {
+    { name = 'supermaven' },
     { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'buffer',  keyword_length = 3 },

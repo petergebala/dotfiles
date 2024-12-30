@@ -7,9 +7,9 @@ require('telescope').setup {
   },
 }
 
-require("telescope").load_extension("live_grep_args")
-
 local builtin = require('telescope.builtin')
+local live_multigrep = require('../../lua/config/telescope/multigrep').setup
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {}) -- File finder
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Git repo file finder
-vim.keymap.set('n', '<leader>gg', require('telescope').extensions.live_grep_args.live_grep_args, {})  -- Live grep
+vim.keymap.set('n', '<leader>gg', live_multigrep, {})  -- Live grep

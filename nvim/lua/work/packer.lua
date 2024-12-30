@@ -4,15 +4,24 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+
+  -- Supermaven
+  use {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
+  }
 
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.x', -- or , branch = '0.1.x',
     requires = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-live-grep-args.nvim' },
+      { 'nvim-lua/plenary.nvim' } --,
+      -- { 'nvim-telescope/telescope-live-grep-args.nvim' },
     }
   }
 
@@ -28,8 +37,8 @@ return require('packer').startup(function(use)
   use { 'ellisonleao/gruvbox.nvim' }
 
   -- Treesitter
-  use { 
-    'nvim-treesitter/nvim-treesitter', 
+  use {
+    'nvim-treesitter/nvim-treesitter',
     run = function()
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
