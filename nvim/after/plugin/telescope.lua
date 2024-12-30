@@ -8,7 +8,7 @@ require('telescope').setup {
 }
 
 local builtin = require('telescope.builtin')
-local live_multigrep = require('../../lua/config/telescope/multigrep').setup
+local live_multigrep = require('config.telescope.multigrep').setup
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {}) -- File finder
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Git repo file finder
