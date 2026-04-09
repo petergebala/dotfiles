@@ -10,7 +10,13 @@ ZSH_THEME="bira"
 DISPLAY=:1
 HISTTIMEFORMAT="%Y-%m-%d %T "
 HISTSIZE=5000
-
+KUBE_PS1_SYMBOL_ENABLE=false
+KUBE_PS1_PREFIX="<"
+KUBE_PS1_PREFIX_COLOR="magenta"
+KUBE_PS1_CTX_COLOR="magenta"
+KUBE_PS1_NS_COLOR="cyan"
+KUBE_PS1_SUFFIX=">"
+KUBE_PS1_SUFFIX_COLOR="cyan"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -35,9 +41,12 @@ alias vim="nvim"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler gem rails docker docker-compose kubectl)
+plugins=(git bundler gem rails docker kubectl kubectx kube-ps1)
 
+# rm /home/piotrek/.zcompdump-dromader-tuxedo-5.9
+# rm ~/.oh-my-zsh/cache/completions/_docker
 source $ZSH/oh-my-zsh.sh
+source $HOME/.aliases
 
 ### Custom commands
 alias vendor_install="bundle install --path vendor/bundle --jobs 4 --without development test"
@@ -46,7 +55,13 @@ eval `dircolors ~/.dircolors`
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# opencode
+export PATH=/home/piotrek/.opencode/bin:$PATH
+export EDITOR=nvim
+export PATH=$HOME/.local/bin:$PATH
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
