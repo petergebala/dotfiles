@@ -4,12 +4,6 @@ local lsp = require('lsp-zero').preset({})
 local nvim_lsp = require("lspconfig")
 
 
-local handle = io.popen([[rvm current]])
-local ruby_version = handle:read("*a")
-handle:close()
-
-vim.print(ruby_version)
-
 lsp.ensure_installed({
   'rust_analyzer'
 })
@@ -21,10 +15,10 @@ end)
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
--- (Optional) Configure solagraph language server for neovim
+-- Solargraph via Docker (see ~/dotfiles/solargraph/solargraph-docker)
+-- Requires .solargraph-docker config file in the project root (next to Gemfile)
 require('lspconfig').solargraph.setup{
-  cmd = { 'rvm', ruby_version, 'do', 'solargraph', 'stdio' },
-  -- cmd = { 'solargraph', 'stdio' },
+  cmd = { os.getenv("HOME") .. '/.local/bin/solargraph-docker' },
   root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
   settings = {
     solargraph = {
