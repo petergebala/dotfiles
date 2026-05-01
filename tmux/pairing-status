@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Outputs tmux-formatted color tiles, one per connected pairing user.
+
+CACHE_FILE="/tmp/tmux-pairing-users"
+
+[[ ! -f "$CACHE_FILE" ]] && exit 0
+[[ ! -s "$CACHE_FILE" ]] && exit 0
+
+# 3 gruvbox colors cycling positionally
+COLORS=("colour174" "colour167" "colour175")  # pink, red, purple
+FG_TILE="colour237"
+PREV_BG="colour167"
+
+index=0
+while IFS= read -r email; do
+    [[ -z "$email" ]] && continue
+    BG="${COLORS[$((index % 3))]}"
+    printf '#[bg=%s,fg=%s]#[bg=%s,fg=%s] %s ' "$BG" "$PREV_BG" "$BG" "$FG_TILE" "$email"
+    PREV_BG="$BG"
+    ((index++))
+done < "$CACHE_FILE"

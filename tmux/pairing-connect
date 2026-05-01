@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# SSH ForceCommand for remotepair user.
+# On connect: resolves connecting key to email, adds to cache, attaches tmux.
+# On disconnect: removes email from cache (trap runs after tmux attach returns).
+
+CACHE_FILE="/tmp/tmux-pairing-users"
+
+# Resolve fingerprint -> email directly (requires remotepair in adm group)
+fingerprint=$(grep "Accepted publickey for remotepair" /var/log/auth.log | tail -1 | awk '{print $NF}')
+email=$(ssh-keygen -lf /home/remotepair/.ssh/authorized_keys 2>/dev/null \
+    | awk -v fp="$fingerprint" '$2==fp{for(i=3;i<NF;i++) printf $i" "; print ""}' \
+    | xargs)
+email="${email:-unknown}"
+
+cleanup() {
+    if [[ -f "$CACHE_FILE" ]]; then
+        grep -v "^${email}$" "$CACHE_FILE" > "${CACHE_FILE}.tmp"
+        mv "${CACHE_FILE}.tmp" "$CACHE_FILE"
+    fi
+}
+trap cleanup EXIT SIGHUP SIGINT SIGTERM
+
+touch "$CACHE_FILE"
+echo "$email" >> "$CACHE_FILE"
+sort -u "$CACHE_FILE" -o "$CACHE_FILE"
+
+tmux -S /tmp/pair attach

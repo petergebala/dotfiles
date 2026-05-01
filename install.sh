@@ -1,35 +1,30 @@
 #!/bin/sh
 
 cutstring="DO NOT EDIT BELOW THIS LINE"
+local_config="$HOME/.config"
+home_config="$HOME"
 
-for name in *; do
-  target="$HOME/.$name"
-  if [ -e "$target" ]; then
-    if [ ! -L "$target" ]; then
-      cutline=`grep -n -m1 "$cutstring" "$target" | sed "s/:.*//"`
-      if [ -n "$cutline" ]; then
-        cutline=$((cutline-1))
-        echo "Updating $target"
-        head -n $cutline "$target" > update_tmp
-        startline=`sed '1!G;h;$!d' "$name" | grep -n -m1 "$cutstring" | sed "s/:.*//"`
-        if [ -n "$startline" ]; then
-          tail -n $startline "$name" >> update_tmp
-        else
-          cat "$name" >> update_tmp
-        fi
-        mv update_tmp "$target"
-      else
-        echo "WARNING: $target exists but is not a symlink."
-      fi
-    fi
-  else
-    if [ "$name" != 'install.sh' ]; then
-      echo "Creating $target"
-      if [ -n "$(grep "$cutstring" "$name")" ]; then
-        cp "$PWD/$name" "$target"
-      else
-        ln -s "$PWD/$name" "$target"
-      fi
-    fi
-  fi
-done
+ln -sf "$PWD/nvim" "$local_config/nvim"
+ln -sf "$PWD/tmux" "$local_config/tmux"
+ln -sf "$PWD/opencode" "$local_config/opencode"
+ln -sf "$PWD/zshrc" "$home_config/.zshrc"
+ln -sf "$PWD/pryrc" "$home_config/.pryrc"
+ln -sf "$PWD/dircolors" "$home_config/.dircolors"
+ln -sf "$PWD/gitconfig" "$home_config/.gitconfig"
+ln -sf "$PWD/gitignore" "$home_config/.gitignore"
+ln -sf "$PWD/aliases" "$home_config/.aliases"
+
+mkdir -p "$HOME/.local/bin"
+ln -sf "$PWD/solargraph/solargraph-docker" "$HOME/.local/bin/solargraph-docker"
+
+# Pairing: make scripts executable
+chmod +x "$PWD/tmux/pairing-connect"
+chmod +x "$PWD/tmux/pairing-status"
+
+# Pairing: install connect script to /usr/local/bin (remotepair can execute without traversing home dir)
+sudo cp "$PWD/tmux/pairing-connect" /usr/local/bin/pairing-connect
+sudo chown root:root /usr/local/bin/pairing-connect
+sudo chmod 755 /usr/local/bin/pairing-connect
+
+# Pairing: add remotepair to adm group so it can read /var/log/auth.log
+sudo usermod -a -G adm remotepair

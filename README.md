@@ -150,13 +150,18 @@ sudo usermod -a -G remotepair MAIN_USER
 
 Add Public ssh keys to /home/remotepair/.ssh/authorized_keys
 
-Change in /etc/sshd_config
+Change in /etc/ssh/sshd_config
 ```
 Match User remotepair
   PasswordAuthentication no
   X11Forwarding no
-  ForceCommand tmux -S /tmp/pair attach
+  ForceCommand /usr/local/bin/pairing-connect
 ```
+
+Run install.sh - it will automatically:
+- Make pairing scripts executable
+- Install pairing-connect to /usr/local/bin/ (outside home dir so remotepair can execute it)
+- Add remotepair to adm group so it can read /var/log/auth.log
 
 Restart ssh
 ```
@@ -168,3 +173,8 @@ Enable/Disable ssh connection
 chmod 777 /tmp/pair
 chmod 771 /tmp/pair
 ```
+
+##### How pairing users display works
+On connect, pairing-connect resolves the SSH key fingerprint to an email from
+authorized_keys, writes it to /tmp/tmux-pairing-users. On disconnect it removes it.
+The tmux status bar reads that file - showing connected users by name.
