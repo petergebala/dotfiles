@@ -1,0 +1,67 @@
+#!/bin/bash
+set -euo pipefail
+
+# Find project root by walking up looking for Gemfile
+find_project_root() {
+  local dir="$PWD"
+  while [ "$dir" != "/" ]; do
+    [ -f "$dir/Gemfile" ] && echo "$dir" && return 0
+    dir=$(dirname "$dir")
+  done
+  echo "ERROR: No Gemfile found in any parent directory" >&2
+  return 1
+}
+
+PROJECT_ROOT=$(find_project_root)
+CONFIG_FILE="$PROJECT_ROOT/.solargraph-docker"
+
+if [ ! -f "$CONFIG_FILE" ]; then
+  echo "ERROR: No .solargraph-docker config found at $CONFIG_FILE" >&2
+  echo "Create it with:" >&2
+  echo "  COMPOSE_FILE=./docker-compose.yml" >&2
+  echo "  SERVICE=app" >&2
+  exit 1
+fi
+
+# Read config
+SERVICE=""
+COMPOSE_FILE=""
+while IFS='=' read -r key value; do
+  case "$key" in
+    SERVICE) SERVICE="$value" ;;
+    COMPOSE_FILE) COMPOSE_FILE="$value" ;;
+  esac
+done < "$CONFIG_FILE"
+
+if [ -z "$SERVICE" ]; then
+  echo "ERROR: SERVICE not set in $CONFIG_FILE" >&2
+  exit 1
+fi
+
+if [ -z "$COMPOSE_FILE" ]; then
+  echo "ERROR: COMPOSE_FILE not set in $CONFIG_FILE" >&2
+  exit 1
+fi
+
+# Resolve compose file path relative to project root
+COMPOSE_PATH="$(cd "$PROJECT_ROOT" && realpath "$COMPOSE_FILE")"
+if [ ! -f "$COMPOSE_PATH" ]; then
+  echo "ERROR: docker-compose file not found at $COMPOSE_PATH" >&2
+  exit 1
+fi
+
+# Forward BUNDLE_* env vars from host to container
+BUNDLE_ENV_ARGS=()
+while IFS='=' read -r key value; do
+  BUNDLE_ENV_ARGS+=(-e "$key=$value")
+done < <(env | grep '^BUNDLE_' || true)
+
+# Cache solargraph data inside project dir so it persists between container restarts
+SOLARGRAPH_CACHE="$PROJECT_ROOT/.solargraph/cache"
+
+exec docker compose -f "$COMPOSE_PATH" run --rm -T --no-deps \
+  -v "$PROJECT_ROOT:$PROJECT_ROOT" \
+  -w "$PROJECT_ROOT" \
+  -e "SOLARGRAPH_CACHE=$SOLARGRAPH_CACHE" \
+  "${BUNDLE_ENV_ARGS[@]}" \
+  "$SERVICE" bundle exec solargraph stdio
