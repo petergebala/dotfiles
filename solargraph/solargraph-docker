@@ -63,5 +63,6 @@ exec docker compose -f "$COMPOSE_PATH" run --rm -T --no-deps \
   -v "$PROJECT_ROOT:$PROJECT_ROOT" \
   -w "$PROJECT_ROOT" \
   -e "SOLARGRAPH_CACHE=$SOLARGRAPH_CACHE" \
+  -e "RUBYOPT=--enable-yjit" \
   "${BUNDLE_ENV_ARGS[@]}" \
   "$SERVICE" bundle exec solargraph stdio
